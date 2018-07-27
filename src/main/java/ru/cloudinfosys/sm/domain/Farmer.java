@@ -1,9 +1,10 @@
 package ru.cloudinfosys.sm.domain;
 
+import org.mongodb.morphia.annotations.Entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.TextIndexed;
-import org.springframework.scheduling.annotation.Scheduled;
 
+@Entity
 public class Farmer {
     @Id
     private String id;
