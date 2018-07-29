@@ -16,6 +16,7 @@ public interface FarmerRepository extends MongoRepository<Farmer, String> {
                                                                @Param("lastName") String lastName);
     List<Farmer> findByFirstNameContains(@Param("name") String name);
     List<Farmer> findByFirstName(@Param("name") String name);
+    Farmer findByFirstNameAndLastName(String firstName, String lastName);
 
 //    @Query("{}")
 //    Page<Farmer> findByAllFields(Pageable pageable);

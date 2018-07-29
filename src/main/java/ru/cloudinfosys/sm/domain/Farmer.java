@@ -1,8 +1,12 @@
 package ru.cloudinfosys.sm.domain;
 
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.geo.GeoJson;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.data.mongodb.core.index.TextIndexed;
+
+import java.util.Arrays;
 
 @Entity
 public class Farmer {
@@ -14,8 +18,9 @@ public class Farmer {
     @TextIndexed
     private String lastName;
 
-    public Farmer() {
+    private GeoJsonPoint location = new GeoJsonPoint(0, 0);
 
+    public Farmer() {
     };
 
     public Farmer (String firstName, String lastName) {
@@ -47,12 +52,21 @@ public class Farmer {
         this.lastName = lastName;
     }
 
+    public GeoJsonPoint getLocation() {
+        return location;
+    }
+
+    public void setLocation(GeoJsonPoint location) {
+        this.location = location;
+    }
+
     @Override
     public String toString() {
         return "Farmer{" +
                 "id='" + id + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", location=" + location +
                 '}';
     }
 }
