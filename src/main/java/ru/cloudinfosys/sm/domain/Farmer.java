@@ -1,14 +1,11 @@
 package ru.cloudinfosys.sm.domain;
 
-import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.geo.GeoJson;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.data.mongodb.core.index.TextIndexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Arrays;
-
-@Entity
+@Document
 public class Farmer {
     @Id
     private String id;

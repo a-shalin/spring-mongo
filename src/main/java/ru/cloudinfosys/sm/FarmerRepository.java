@@ -1,7 +1,5 @@
 package ru.cloudinfosys.sm;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,8 +14,7 @@ public interface FarmerRepository extends MongoRepository<Farmer, String> {
                                                                @Param("lastName") String lastName);
     List<Farmer> findByFirstNameContains(@Param("name") String name);
     List<Farmer> findByFirstName(@Param("name") String name);
-    Farmer findByFirstNameAndLastName(String firstName, String lastName);
 
-//    @Query("{}")
-//    Page<Farmer> findByAllFields(Pageable pageable);
+    @Query("{$text: {$search : ?0}}")
+    List<Farmer> findByName(String name);
 }

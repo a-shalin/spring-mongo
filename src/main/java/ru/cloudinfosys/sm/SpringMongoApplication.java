@@ -10,7 +10,7 @@ import ru.cloudinfosys.sm.domain.Market;
 
 import javax.annotation.PostConstruct;
 
-import java.math.BigDecimal;
+import java.util.List;
 
 import static java.util.Arrays.asList;
 
@@ -31,7 +31,7 @@ public class SpringMongoApplication {
 	public void initData() {
 	    farmerRepository.deleteAll();
 
-        farmerRepository.insert(asList(
+        List<Farmer> farmers = farmerRepository.insert(asList(
             new Farmer("Andrey", "Shalin"),
             new Farmer("Arseniy", "Shalin"),
             new Farmer("Mitrofan", "Shalin")
@@ -57,7 +57,7 @@ public class SpringMongoApplication {
         Market market;
 
         market = new Market();
-        market.setFarmer(farmerRepository.findByFirstNameAndLastName("Andrey", "Shalin"));
+        market.setFarmer(farmers.get(0));
         market.setAnimalPart(animalRepository.findByName("Cow").getParts().get(0));
         market.setWeight(7.11);
         market.setPrice(311.12);

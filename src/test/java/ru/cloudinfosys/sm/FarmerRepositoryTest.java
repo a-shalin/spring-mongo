@@ -9,7 +9,7 @@ import ru.cloudinfosys.sm.domain.Farmer;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -30,5 +30,15 @@ public class FarmerRepositoryTest {
             farmerRepository.delete(farmer1);
             farmerRepository.delete(farmer2);
         }
+    }
+
+    @Test
+    public void findFullText() {
+        List<Farmer> farmers;
+        farmers = farmerRepository.findByName("Andrey");
+        assertEquals(1, farmers.size());
+
+        farmers = farmerRepository.findByName("Shalin");
+        assertEquals(3, farmers.size());
     }
 }

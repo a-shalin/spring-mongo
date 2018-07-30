@@ -2,8 +2,6 @@ package ru.cloudinfosys.sm.domain;
 
 import org.springframework.data.annotation.Id;
 
-import java.math.BigDecimal;
-
 public class Market {
     @Id
     private String id;
