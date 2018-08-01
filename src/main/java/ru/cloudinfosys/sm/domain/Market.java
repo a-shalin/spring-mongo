@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 public class Market {
     @Id
     private String id;
-    private Farmer farmer;
+    private User farmer;
     private AnimalPart animalPart;
     private double weight;
     private double weightError;
@@ -19,11 +19,11 @@ public class Market {
         this.id = id;
     }
 
-    public Farmer getFarmer() {
+    public User getFarmer() {
         return farmer;
     }
 
-    public void setFarmer(Farmer farmer) {
+    public void setFarmer(User farmer) {
         this.farmer = farmer;
     }
 

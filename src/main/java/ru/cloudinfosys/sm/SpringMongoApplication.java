@@ -3,14 +3,15 @@ package ru.cloudinfosys.sm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import ru.cloudinfosys.sm.db.AnimalRepository;
+import ru.cloudinfosys.sm.db.MarketRepository;
+import ru.cloudinfosys.sm.db.UserRepository;
 import ru.cloudinfosys.sm.domain.Animal;
 import ru.cloudinfosys.sm.domain.AnimalPart;
-import ru.cloudinfosys.sm.domain.Farmer;
 import ru.cloudinfosys.sm.domain.Market;
+import ru.cloudinfosys.sm.domain.User;
 
 import javax.annotation.PostConstruct;
-
-import java.util.List;
 
 import static java.util.Arrays.asList;
 
@@ -21,21 +22,32 @@ public class SpringMongoApplication {
 	}
 
 	@Autowired
-    FarmerRepository farmerRepository;
+    UserRepository userRepository;
     @Autowired
     AnimalRepository animalRepository;
     @Autowired
     MarketRepository marketRepository;
+    @Autowired
+    App app;
 
 	@PostConstruct
 	public void initData() {
-	    farmerRepository.deleteAll();
+	    userRepository.deleteAll();
 
-        List<Farmer> farmers = farmerRepository.insert(asList(
-            new Farmer("Andrey", "Shalin"),
-            new Farmer("Arseniy", "Shalin"),
-            new Farmer("Mitrofan", "Shalin")
-        ));
+        String[][] users = {
+                {"Andrey", "Shalin"},
+                {"Arseniy", "Shalin"},
+                {"Mitrofan", "Shalin"}
+        };
+
+        for (String[] userData : users) {
+            User user = new User();
+            user.setFirstName(userData[0]);
+            user.setLastName(userData[1]);
+            user.setLogin((userData[0]+"."+userData[1]).toLowerCase());
+            user.setPassHash(app.getPassHash(user.getLogin()));
+            userRepository.insert(user);
+        }
 
         animalRepository.deleteAll();
 
@@ -57,7 +69,7 @@ public class SpringMongoApplication {
         Market market;
 
         market = new Market();
-        market.setFarmer(farmers.get(0));
+        market.setFarmer(userRepository.findByLogin("andrey.shalin"));
         market.setAnimalPart(animalRepository.findByName("Cow").getParts().get(0));
         market.setWeight(7.11);
         market.setPrice(311.12);

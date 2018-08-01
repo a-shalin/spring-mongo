@@ -5,25 +5,34 @@ import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+
 @Document
-public class Farmer {
+public class User {
     @Id
     private String id;
 
     @TextIndexed
+    @NotNull
+    private String login;
+    @NotNull
+    private String passHash;
+
+    @TextIndexed
+    @NotNull
     private String firstName;
+
     @TextIndexed
     private String lastName;
 
+    @TextIndexed
+    @NotNull
+    @Email
+    private String email;
+
+    @NotNull
     private GeoJsonPoint location = new GeoJsonPoint(0, 0);
-
-    public Farmer() {
-    };
-
-    public Farmer (String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
 
     public String getId() {
         return id;
@@ -57,9 +66,33 @@ public class Farmer {
         this.location = location;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassHash() {
+        return passHash;
+    }
+
+    public void setPassHash(String passHash) {
+        this.passHash = passHash;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
-        return "Farmer{" +
+        return "User{" +
                 "id='" + id + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
