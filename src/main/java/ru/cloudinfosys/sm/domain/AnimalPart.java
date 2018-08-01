@@ -2,12 +2,15 @@ package ru.cloudinfosys.sm.domain;
 
 import org.springframework.data.annotation.Id;
 
+import java.util.List;
+
 public class AnimalPart {
     @Id
     private String id;
     private String name;
     private int quantity;
     private double typicalWeight;
+    private List<AnimalPart> elements;
 
     public AnimalPart() {}
     public AnimalPart(String name, int quantity, double typicalWeight) {
@@ -55,6 +58,7 @@ public class AnimalPart {
                 ", name='" + name + '\'' +
                 ", quantity=" + quantity +
                 ", typicalWeight=" + typicalWeight +
+                ", elements=" + elements +
                 '}';
     }
 }

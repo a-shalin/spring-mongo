@@ -45,7 +45,6 @@ public class SpringMongoApplication {
             user.setFirstName(userData[0]);
             user.setLastName(userData[1]);
             user.setLogin((userData[0]+"."+userData[1]).toLowerCase());
-            user.setPassHash(app.getPassHash(user.getLogin()));
             userRepository.insert(user);
         }
 

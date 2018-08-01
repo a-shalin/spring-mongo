@@ -16,8 +16,6 @@ public class User {
     @TextIndexed
     @NotNull
     private String login;
-    @NotNull
-    private String passHash;
 
     @TextIndexed
     @NotNull
@@ -32,7 +30,7 @@ public class User {
     private String email;
 
     @NotNull
-    private GeoJsonPoint location = new GeoJsonPoint(0, 0);
+    private GeoJsonPoint location = null;
 
     public String getId() {
         return id;
@@ -74,14 +72,6 @@ public class User {
         this.login = login;
     }
 
-    public String getPassHash() {
-        return passHash;
-    }
-
-    public void setPassHash(String passHash) {
-        this.passHash = passHash;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -94,8 +84,10 @@ public class User {
     public String toString() {
         return "User{" +
                 "id='" + id + '\'' +
+                ", login='" + login + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
                 ", location=" + location +
                 '}';
     }
